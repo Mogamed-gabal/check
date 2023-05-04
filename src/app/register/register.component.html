@@ -1,0 +1,113 @@
+<div class="login w-100 vh-100">
+    <div class="row gx-4 w-100 ps-5 d-flex justify-content-between">
+        <div class="error w-100 text-center">
+            <p *ngIf="isError" class=" alert alert-danger">{{errMessage}}</p>
+        </div>
+        <!-- left-side(registerForm) -->
+            <div class="col-md-6  left-side ">
+                <div class="login-heading d-flex justify-content-between">
+                    <div class="text">
+                        <h2>Create an account</h2>
+                    <p>Sign up now and unlock exclusive access!</p>
+                    </div>
+                    <!-- page logo -->
+                    <div class="logo">
+                        <img src="../../assets/img/logo.png" alt="">
+                     </div>
+                 </div>
+                    
+                <form [formGroup]="registerForm" (ngSubmit)="sendData(registerForm)" action="">
+                    <div class="name d-flex justify-content-between mb-2">
+                            <div class="first-name">
+                                <label for="FirstName">First Name</label>
+                                <input type="text" id=" name" formControlName="name" name="name" class=" form-control">
+                                <!-- first name errors -->
+                                 <div *ngIf=" registerForm.get('name')?.errors&&registerForm.get('name')?.touched">
+                                     <p *ngIf="registerForm.get('name')?.getError('required')" class=" alert alert-danger pt-1">
+                                              name is requierd
+                                    </p>
+                                 </div>
+                            </div>
+                            <!-- <div class="second-name">
+                                <label for="secondName">second Name</label>
+                                <input type="text" id=" name" class=" form-control">
+                            </div> -->
+                    </div>
+                    <label for="mobilenum">Mobile Number</label>
+                    <input type="text" id="mobilenum" name="phone" formControlName="phone" class=" form-control mb-2">
+                   
+                    <!-- phone-num alerts -->
+                   <div *ngIf=" registerForm.get('phone')?.errors&&registerForm.get('phone')?.touched">
+                    <p *ngIf="registerForm.get('phone')?.getError('required')" class=" alert alert-danger pt-1">
+                        phone number is requierd
+                    </p>
+                    <p *ngIf="registerForm.get('phone')?.getError('pattern')" class=" alert alert-danger pt-1">
+                       please Enter valid mobileNum
+                    </p>
+                        </div>
+                        <!-- national id field -->
+                    <label for="NationalID">NationalID</label>
+                    <input type="text" id="NationalID" name=" ssid" formControlName="ssid" class=" form-control mb-2">
+                    
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name=" email" formControlName="email" class=" form-control mb-2" required>
+                    
+                    <!-- email alerts -->
+                    <div *ngIf=" registerForm.get('email')?.errors&&registerForm.get('email')?.touched">
+                        <p *ngIf="registerForm.get('email')?.getError('required')" class=" alert alert-danger pt-1">
+                        Email is requierd
+                        </p>
+                        <p *ngIf="registerForm.get('email')?.getError('email')" class=" alert alert-danger pt-1">
+                           please Enter valid Email
+                        </p>
+                    </div>
+
+
+                    <div class="pass d-flex justify-content-between mb-2">
+                    <div class="password">
+                    <label for="password">password</label>
+                    <input type="password" id="password" name=" password" formControlName="password" class=" form-control ">
+                    <!-- pass errors alerts -->
+                    <div *ngIf=" registerForm.get('password')?.errors&&registerForm.get('password')?.touched">
+                        <p *ngIf="registerForm.get('password')?.getError('required')" class=" alert alert-danger pt-1">
+                            password is requierd
+                    </p>
+                    </div>
+                    </div>
+                    
+                        <div class="rePass">
+                        <label for="rePassword">rePassword</label>
+                    <input type="password" id="rePassword" name="confirmPassword" formControlName="confirmPassword" class=" form-control ">
+                    <!-- rePass errors alerts  -->
+                         <div *ngIf=" registerForm.get('confirmPassword')?.errors&&registerForm.get('confirmPassword')?.touched">
+                            <p *ngIf="registerForm.get('confirmPassword')?.getError('required')" class=" alert alert-danger pt-1">
+                                passwordConfirmation is requierd
+                        </p>
+                        <p class="alert alert-danger pt-1" *ngIf="isNotConfirm">{{errConfirm}}</p>
+                        </div>     
+                    </div>
+                    
+                    </div>
+                    
+                   
+                    
+                    
+                    <!-- submit btn and forgrt pass link -->
+                    <div class="d-flex w-50 justify-content-between mb-2 forget">
+                            <a class="text-decoration-none py-2" routerLink="/getPass">Forget Password</a>
+                    </div>
+                    <button class="btn btn-primary px-5 w-50 m-auto py-2" type="submit">
+                       <span *ngIf="!isLoading">submit</span> 
+                       <span *ngIf="isLoading" class=""><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
+                
+                </form>
+            </div>
+            <!-- right-side(page-img) -->
+            <div class="col-md-5 right-side  p-0">
+                <div class="img-box">
+                    <img src="../../assets/img/registration.png " class="w-100 vh-100" alt="">
+                </div>
+            </div>
+    </div>
+</div>
